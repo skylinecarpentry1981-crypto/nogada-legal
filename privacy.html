@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Privacy Policy — NOGADA</title>
+<meta name="description" content="Privacy Policy for the NOGADA construction job-tracking app." />
+<style>
+  :root { --bg:#0a0a0a; --fg:#f5f5f4; --muted:#a3a3a3; --border:#262626; --accent:#ea580c; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#fafafa; --fg:#0a0a0a; --muted:#525252; --border:#e5e5e5; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+    font-size: 16px; line-height: 1.6;
+    padding: 40px 24px 100px;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .back { display: inline-block; color: var(--muted); text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+  .back:hover { color: var(--fg); }
+  .brand { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  h1 { font-size: 32px; font-weight: 300; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .effective { font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+  h2 { font-size: 18px; font-weight: 600; margin: 40px 0 12px; }
+  p { margin-bottom: 14px; color: var(--fg); }
+  ul { margin: 0 0 16px 22px; }
+  li { margin-bottom: 6px; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { background: var(--border); padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+  .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./index.html">‹ NOGADA · Legal</a>
+  <div class="brand">Privacy Policy</div>
+  <h1>Privacy Policy</h1>
+  <div class="effective">Effective date: 16 May 2026</div>
+
+  <h2>Who we are</h2>
+  <p>NOGADA (노가다) is a job-tracking app for construction trades — small builders, carpenters, plumbers, electricians, tilers, and other sole-trader and small-business owners. It is published as an independent app by the developer.</p>
+  <p>If you have questions about this policy or your data, email <strong><a href="mailto:skylinecarpentry@hotmail.com">skylinecarpentry@hotmail.com</a></strong>.</p>
+
+  <h2>What we collect</h2>
+  <p>We collect only what the app needs to work for you:</p>
+  <ul>
+    <li><strong>Your email address</strong> — for sign-in and to keep your data attached to your account.</li>
+    <li><strong>Business identity</strong> you enter during setup — business name, phone, ABN — so the app can render your invoices and quotes correctly.</li>
+    <li><strong>Data you enter</strong> — projects, clients, crew members, daily rates, work logs, timesheet entries, quotes, invoices, materials, photos, notes, and other business records you create.</li>
+    <li><strong>Crew assignments from Google Calendar</strong> — only when you explicitly grant calendar access. We read event titles + dates from the calendar account you authorise; we never write to your calendar and never read events outside the date window the app is currently displaying.</li>
+    <li><strong>Receipt photos and material descriptions</strong> — when you upload a receipt, the image is stored in your account so the app can show it back to you.</li>
+  </ul>
+  <p>We do <strong>not</strong> collect:</p>
+  <ul>
+    <li>Your contacts</li>
+    <li>Your real-time location</li>
+    <li>Your browsing history</li>
+    <li>Device identifiers used for advertising</li>
+    <li>Any analytics or behavioural-tracking data</li>
+  </ul>
+
+  <h2>How we store it</h2>
+  <p>Your data is stored in <strong>Google Firebase Firestore</strong> (Australia / <code>asia-southeast1</code> region). Each user's data lives at a separate, security-rule-isolated path (<code>users/{your-uid}/...</code>). Photos are stored in <strong>Firebase Storage</strong>.</p>
+  <p>We use <strong>Firebase Authentication</strong> to manage sign-in (email + password). We use <strong>Google's OAuth</strong> when you choose to connect your Google Calendar.</p>
+  <p>When you upload a receipt, we send the image to <strong>Anthropic's Claude API</strong> for one-shot text extraction (so we can show the parsed amount + supplier back to you). The image is sent over HTTPS, processed for the response, and not retained by Anthropic for training. See <a href="https://www.anthropic.com/legal/privacy">Anthropic's API privacy</a> for details.</p>
+
+  <h2>Who can see your data</h2>
+  <p><strong>Only you, and crew members you explicitly link to your account.</strong></p>
+  <ul>
+    <li>Firebase security rules enforce that only the signed-in user matching the data's owner can read or write that data.</li>
+    <li>When a crew member signs up using "I'm crew" and links to your business via your email, they can read (but not delete) the projects + assignments + photos you've shared with them through their assigned work. They cannot see your invoices, quotes, or financial data.</li>
+    <li>The developer cannot read your jobs, invoices, photos, or any other data through normal app channels.</li>
+  </ul>
+  <p>The Firebase service operator (Google) and Anthropic have technical access to encrypted infrastructure as part of providing their services, governed by their respective privacy policies.</p>
+
+  <h2>Sharing with third parties</h2>
+  <p>We do <strong>not</strong> sell, rent, or share your data with advertisers, data brokers, or third parties for marketing purposes.</p>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li><strong>Edit your data</strong>: any time in the app.</li>
+    <li><strong>Export your data</strong>: open the app → More → Export to download your records.</li>
+    <li><strong>Delete your data</strong>: email <a href="mailto:skylinecarpentry@hotmail.com?subject=Delete%20my%20account">skylinecarpentry@hotmail.com</a> with the subject "Delete my account". We will delete your account and all associated data within 30 days.</li>
+    <li><strong>Disconnect Google Calendar</strong>: open the app → More → Disconnect Calendar. The events already imported stay; no further syncing happens.</li>
+    <li><strong>Disable notifications</strong>: in your device Settings.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>NOGADA is intended for working adults running construction businesses. It is not directed at children under 13, and we do not knowingly collect data from children.</p>
+
+  <h2>Changes</h2>
+  <p>If we materially change how we handle your data, we will update this page and notify users via the app at next sign-in.</p>
+
+  <h2>Contact</h2>
+  <p><strong><a href="mailto:skylinecarpentry@hotmail.com">skylinecarpentry@hotmail.com</a></strong></p>
+
+  <div class="footer">© 2026 NOGADA. <a href="./index.html">Back to legal</a></div>
+</div>
+</body>
+</html>
