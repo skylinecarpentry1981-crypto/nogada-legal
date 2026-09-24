@@ -10,7 +10,7 @@ Required by Apple App Store + Google Play Store as publicly-accessible URLs.
 - `privacy.html` — full Privacy Policy
 - `terms.html` — full Terms of Service
 - `support.html` — FAQ / support page
-- `subcontractor.html` — Subbie onboarding checklist, deemed-worker self check, incident steps (VIC). Ticks saved per device; Save PDF per subbie. `?lang=ko` or `?lang=en` forces the language.
+- `subcontractor.html` — Subbie onboarding checklist, deemed-worker self check, incident steps (VIC). Korean / English / Chinese; ticks saved per device; Download PDF (A4, per subbie) or Print. `?lang=ko|en|zh` forces the language.
 
 All static, no build step, dark/light mode auto.
 
