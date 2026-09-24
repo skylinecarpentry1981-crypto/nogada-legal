@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Subbie Checklist — NOGADA</title>
+<meta name="description" content="Subcontractor onboarding, deemed-worker check and incident response checklist for Victorian construction trades." />
+<style>
+  :root { --bg:#0a0a0a; --fg:#f5f5f4; --muted:#a3a3a3; --border:#262626; --card:#141414; --accent:#ea580c; --ok:#16a34a; --warn:#d97706; --bad:#dc2626; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#fafafa; --fg:#0a0a0a; --muted:#525252; --border:#e5e5e5; --card:#ffffff; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Helvetica Neue", system-ui, sans-serif;
+    font-size: 16px; line-height: 1.6;
+    padding: 40px 16px 100px;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .back { color: var(--muted); text-decoration: none; font-size: 13px; }
+  .back:hover { color: var(--fg); }
+  .lang { display: flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+  .lang button { background: none; border: 0; color: var(--muted); font: inherit; font-size: 13px; padding: 6px 14px; min-height: 36px; cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .brand { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  h1 { font-size: 30px; font-weight: 300; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 8px; }
+  .sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+  h2 { font-size: 18px; font-weight: 600; margin: 36px 0 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  h2 .count { font-size: 13px; font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hint { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+  .field label { font-size: 13px; color: var(--muted); }
+  .field input { font: inherit; color: var(--fg); background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .field input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .list { background: var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; gap: 1px; }
+  .item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: var(--card); cursor: pointer; }
+  .item input { appearance: none; -webkit-appearance: none; flex: none; width: 22px; height: 22px; margin-top: 2px; border: 2px solid var(--muted); border-radius: 6px; display: grid; place-content: center; cursor: pointer; }
+  .item input:checked { background: var(--accent); border-color: var(--accent); }
+  .item input:checked::after { content: ""; width: 6px; height: 11px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px,-1px); }
+  .item input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .item .t { font-size: 15px; font-weight: 500; }
+  .item .d { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .item.done .t { color: var(--muted); text-decoration: line-through; }
+  .q { padding: 14px 16px; background: var(--card); }
+  .q .t { font-size: 15px; margin-bottom: 10px; }
+  .yn { display: flex; gap: 8px; }
+  .yn button { flex: 1; min-height: 40px; font: inherit; font-size: 14px; border-radius: 8px; border: 1px solid var(--border); background: none; color: var(--fg); cursor: pointer; }
+  .yn button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .result { margin-top: 12px; padding: 16px; border-radius: 12px; border: 1px solid var(--border); border-left: 4px solid var(--muted); background: var(--card); font-size: 14px; }
+  .result.bad { border-left-color: var(--bad); }
+  .result.warn { border-left-color: var(--warn); }
+  .result.ok { border-left-color: var(--ok); }
+  .result strong { display: block; font-size: 15px; margin-bottom: 4px; }
+  .call { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .call a { flex: 1 1 180px; text-align: center; text-decoration: none; padding: 12px; border-radius: 10px; font-size: 14px; font-weight: 600; background: var(--accent); color: #fff; }
+  .call a.alt { background: none; color: var(--fg); border: 1px solid var(--border); }
+  .actions { display: flex; gap: 8px; margin-top: 36px; }
+  .actions button { flex: 1; min-height: 44px; font: inherit; font-size: 14px; font-weight: 600; border-radius: 10px; cursor: pointer; border: 1px solid var(--border); background: none; color: var(--fg); }
+  .actions button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .disclaimer { margin-top: 36px; font-size: 12px; color: var(--muted); }
+  .footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+  @media print {
+    :root { --bg:#fff; --fg:#000; --muted:#444; --border:#ccc; --card:#fff; }
+    body { padding: 0; }
+    .top, .actions, .call { display: none; }
+    .item, .q { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="./index.html">‹ NOGADA</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="ko">한국어</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </div>
+
+  <div class="brand" data-i="brand"></div>
+  <h1 data-i="title"></h1>
+  <div class="sub" data-i="subtitle"></div>
+
+  <div class="field">
+    <label for="subbie" data-i="nameLabel"></label>
+    <input id="subbie" type="text" autocomplete="off" />
+  </div>
+
+  <div id="sections"></div>
+
+  <h2 data-i="dwTitle"></h2>
+  <p class="hint" data-i="dwHint"></p>
+  <div class="list" id="quiz"></div>
+  <div class="result" id="dwResult" aria-live="polite"></div>
+
+  <h2 data-i="incTitle"></h2>
+  <p class="hint" data-i="incHint"></p>
+  <div class="call">
+    <a href="tel:000" data-i="call000"></a>
+    <a class="alt" href="tel:132360" data-i="callWs"></a>
+    <a class="alt" href="tel:1800136089" data-i="callAdv"></a>
+  </div>
+  <div id="incident"></div>
+
+  <div class="actions">
+    <button type="button" class="primary" id="print" data-i="print"></button>
+    <button type="button" id="reset" data-i="reset"></button>
+  </div>
+
+  <p class="disclaimer" data-i="disclaimer"></p>
+
+  <div class="footer">
+    NOGADA — job tracking for construction trades. Built in Australia.<br>
+    © 2026 NOGADA.
+  </div>
+</div>
+
+<script>
+(function () {
+  var T = {
+    ko: {
+      brand: '서브컨트랙터 · Victoria',
+      title: '서브 온보딩 체크리스트',
+      subtitle: '현장 투입 전 · 작업 중 · 사고 발생 시. 서브별로 체크하고 PDF로 저장해서 보관하세요.',
+      nameLabel: '서브 이름 / 업체명 · ABN',
+      namePh: '예: John Smith · ABN 12 345 678 901',
+      dwTitle: '간주 근로자(Deemed worker) 자가진단',
+      dwHint: 'ABN이 있어도 실제로는 직원처럼 일하면 사장님 WorkCover에서 보상 책임을 집니다. 근무 기간은 상관없습니다.',
+      yes: '예', no: '아니오',
+      dwEmpty: '질문에 답하면 결과가 표시됩니다.',
+      dwHigh: ['간주 근로자일 가능성 높음', '사장님 WorkCover 보험료 산정(remuneration)에 이 서브의 대금을 포함하세요. 확실하지 않으면 WorkSafe Advisory에 확인하세요.'],
+      dwMid: ['판단이 애매함', 'WorkSafe Advisory(1800 136 089)에 문의하고, 계약 형태(lump sum, 자기 공구, 자기 보험)를 정리해 두세요.'],
+      dwLow: ['독립 사업자일 가능성 높음', '본인 보험(상해·Public Liability) 증서를 반드시 받아 두세요.'],
+      incTitle: '사고 발생 시',
+      incHint: '순서대로 진행하세요. 책임을 인정하는 말이나 문자는 하지 마세요.',
+      call000: '🚑 000 응급', callWs: 'WorkSafe 13 23 60', callAdv: 'Advisory 1800 136 089',
+      print: 'PDF 저장 / 인쇄', reset: '초기화',
+      resetConfirm: '이 기기에 저장된 체크 내용을 모두 지울까요?',
+      disclaimer: '일반 정보이며 법률 자문이 아닙니다. 빅토리아주(OHS Act 2004, WIRC Act 2013) 기준입니다. 금액이 크거나 분쟁이 있으면 WorkSafe 또는 변호사에게 확인하세요. 체크 내용은 이 기기에만 저장됩니다.'
+    },
+    en: {
+      brand: 'Subcontractors · Victoria',
+      title: 'Subbie onboarding checklist',
+      subtitle: 'Before start · on site · if someone gets hurt. Tick one per subbie and save as PDF for your records.',
+      nameLabel: 'Subbie / business name · ABN',
+      namePh: 'e.g. John Smith · ABN 12 345 678 901',
+      dwTitle: 'Deemed-worker self check',
+      dwHint: 'An ABN alone doesn’t decide it. If they really work like an employee, your WorkCover pays. How long they’ve worked for you doesn’t matter.',
+      yes: 'Yes', no: 'No',
+      dwEmpty: 'Answer the questions to see a result.',
+      dwHigh: ['Likely a deemed worker', 'Include what you pay them in your WorkCover remuneration declaration. If unsure, confirm with WorkSafe Advisory.'],
+      dwMid: ['Unclear', 'Call WorkSafe Advisory (1800 136 089) and document the contract terms (lump sum, own tools, own insurance).'],
+      dwLow: ['Likely a genuine contractor', 'Make sure you hold current copies of their own insurance (personal accident + public liability).'],
+      incTitle: 'If someone gets hurt',
+      incHint: 'Work through in order. Don’t admit liability, including by text.',
+      call000: '🚑 000 Emergency', callWs: 'WorkSafe 13 23 60', callAdv: 'Advisory 1800 136 089',
+      print: 'Save PDF / Print', reset: 'Reset',
+      resetConfirm: 'Clear all ticks saved on this device?',
+      disclaimer: 'General information, not legal advice. Based on Victorian law (OHS Act 2004, WIRC Act 2013). For large claims or disputes, check with WorkSafe or a lawyer. Ticks are saved on this device only.'
+    }
+  };
+
+  // [id, ko title, ko detail, en title, en detail]
+  var SECTIONS = [
+    { id: 'pre', ko: '1. 현장 투입 전', en: '1. Before they start', items: [
+      ['abn', 'ABN 확인', 'abr.business.gov.au에서 조회. 개인(sole trader)인지 Pty Ltd인지 기록', 'ABN checked', 'Look up on abr.business.gov.au. Note sole trader vs Pty Ltd'],
+      ['contract', '서브 계약서 서명', '범위, lump sum 금액, 자기 공구·자재 사용을 명시', 'Subcontract signed', 'Scope, lump-sum price, own tools and materials stated'],
+      ['pl', 'Public Liability 보험증서', '보장 금액과 만료일을 기록 (보통 $10M 이상)', 'Public liability certificate', 'Record cover amount and expiry (usually $10M+)'],
+      ['pa', '개인 상해·소득보장 보험증서', 'Personal Accident / Income Protection. 없으면 deemed worker 위험', 'Personal accident / income protection', 'If they have none, deemed-worker risk goes up'],
+      ['wc', '직원이 있으면 그 업체의 WorkCover 증서', '서브가 자기 직원을 데려오는 경우', 'Their WorkCover certificate (if they employ staff)', 'When the subbie brings their own workers'],
+      ['white', 'White Card (Construction Induction)', '사본 보관', 'White Card (construction induction)', 'Keep a copy'],
+      ['tickets', '면허·티켓', 'EWP, 비계, 지게차 등 해당 작업에 필요한 것', 'Licences and tickets', 'EWP, scaffold, forklift etc. as the work requires'],
+      ['induct', '현장 Induction 서명', '날짜와 서명, 비상 연락처 포함', 'Site induction signed', 'Dated and signed, emergency contact recorded'],
+      ['swms', 'SWMS 서명', '고위험 작업마다. 서브 서명 필수', 'SWMS signed', 'For every high-risk task, signed by the subbie'],
+      ['ppe', 'PPE 지급·확인 기록', '장갑, 보안경, 귀마개 등. 날짜 기록', 'PPE issued / checked', 'Gloves, glasses, hearing etc. with date']
+    ]},
+    { id: 'ongoing', ko: '2. 작업 중 (정기 점검)', en: '2. While on site (ongoing)', items: [
+      ['toolbox', 'Toolbox talk 기록', '날짜, 주제, 참석자 서명', 'Toolbox talk records', 'Date, topic, attendee signatures'],
+      ['swmsrev', '작업이 바뀌면 SWMS 갱신', '새 작업 = 새 SWMS 또는 수정본 재서명', 'SWMS reviewed when the task changes', 'New task = new or re-signed SWMS'],
+      ['plant', '장비 점검 기록', '톱, 네일건, 사다리, 전선 테스트&태그', 'Plant and tool inspections', 'Saws, nail guns, ladders, test & tag'],
+      ['expiry', '보험 만료일 재확인', '만료되면 새 증서를 받기 전까지 투입 중지', 'Insurance expiry rechecked', 'Expired = off site until a new certificate'],
+      ['remun', 'Deemed worker라면 WorkCover 보험료 신고에 포함', '아래 자가진단 참고', 'Deemed workers included in WorkCover remuneration', 'See the self check below']
+    ]}
+  ];
+
+  var QUIZ = [
+    ['q1', '개인(sole trader) 또는 파트너십이고, 자기 직원이 없나요?', 'Sole trader or partnership with no employees of their own?'],
+    ['q2', '시급·일당으로 받나요? (작업 단위 lump sum이 아니라)', 'Paid by the hour or day, not a lump sum per job?'],
+    ['q3', '대부분 사장님 일만 하나요? (다른 고객이 거의 없음)', 'Works mostly or only for you (few other clients)?'],
+    ['q4', '공구·자재를 사장님이 대나요?', 'You supply the tools and materials?'],
+    ['q5', '작업 방법과 시간을 사장님이 지시하나요?', 'You direct how and when they work?']
+  ];
+
+  var INCIDENT = { id: 'inc', ko: '', en: '', items: [
+    ['i1', '응급처치 및 병원 이송', '심하면 000', 'First aid and medical treatment', 'Call 000 if serious'],
+    ['i2', 'WorkSafe 신고 대상인지 확인', '입원, 절단, 심한 열상, 피부 박리, 골절 등 → 즉시 13 23 60 전화', 'Check if it’s a notifiable incident', 'Hospital admission, amputation, serious laceration, degloving etc. → call 13 23 60 immediately'],
+    ['i3', '현장 보존', '신고 대상이면 WorkSafe가 허락할 때까지 현장을 건드리지 않음', 'Preserve the site', 'If notifiable, don’t disturb until WorkSafe says so'],
+    ['i4', '48시간 안에 서면 신고', '신고 대상인 경우 WorkSafe 양식 제출', 'Written notice within 48 hours', 'For notifiable incidents, lodge the WorkSafe form'],
+    ['i5', '증거 수집', '사진, 목격자 진술, 시간, 작업 내용, 사용 장비', 'Collect evidence', 'Photos, witness statements, time, task, equipment used'],
+    ['i6', '기록 첨부', '서명된 SWMS, Induction, Toolbox, PPE 기록', 'Attach your records', 'Signed SWMS, induction, toolbox talks, PPE records'],
+    ['i7', '사고 기록부 작성', '사고 등록부(Register of injuries)에 기록', 'Register of injuries', 'Record it in your injury register'],
+    ['i8', '보험사 통보', '사장님 WorkCover 보험사 + Public Liability 보험사', 'Notify your insurers', 'Your WorkCover agent + public liability insurer'],
+    ['i9', '서브 보험 확인', '서브 본인의 상해 보험 청구 안내', 'Check the subbie’s own cover', 'Point them to their personal accident claim'],
+    ['i10', '책임 인정 금지', '말, 문자, 카톡 모두. 사실만 기록', 'Don’t admit liability', 'Verbal, text or chat. Record facts only']
+  ]};
+
+  var KEY = 'nogada.subbie.v1';
+  var state = { lang: null, name: '', checks: {}, quiz: {} };
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) state = Object.assign(state, saved); } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  // ?lang=ko|en lets the app open this page in the user's language
+  var qp = (location.search.match(/[?&]lang=(ko|en)/) || [])[1];
+  var lang = qp || state.lang || ((navigator.language || '').indexOf('ko') === 0 ? 'ko' : 'en');
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  function renderList(sec, host, titleText) {
+    if (titleText) {
+      var h = el('h2'); h.appendChild(el('span', null, titleText));
+      var c = el('span', 'count'); h.appendChild(c); host.appendChild(h);
+    }
+    var list = el('div', 'list');
+    sec.items.forEach(function (it) {
+      var id = sec.id + '.' + it[0];
+      var row = el('label', 'item');
+      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!state.checks[id];
+      var txt = el('div');
+      txt.appendChild(el('div', 't', lang === 'ko' ? it[1] : it[3]));
+      txt.appendChild(el('div', 'd', lang === 'ko' ? it[2] : it[4]));
+      row.appendChild(cb); row.appendChild(txt);
+      row.classList.toggle('done', cb.checked);
+      cb.addEventListener('change', function () {
+        state.checks[id] = cb.checked; row.classList.toggle('done', cb.checked); save(); updateCount();
+      });
+      list.appendChild(row);
+    });
+    host.appendChild(list);
+    function updateCount() {
+      if (!titleText) return;
+      var n = sec.items.filter(function (it) { return state.checks[sec.id + '.' + it[0]]; }).length;
+      c.textContent = n + ' / ' + sec.items.length;
+    }
+    updateCount();
+  }
+
+  function renderQuiz() {
+    var host = document.getElementById('quiz'); host.innerHTML = '';
+    QUIZ.forEach(function (q) {
+      var box = el('div', 'q');
+      box.appendChild(el('div', 't', lang === 'ko' ? q[1] : q[2]));
+      var yn = el('div', 'yn');
+      [['y', T[lang].yes], ['n', T[lang].no]].forEach(function (o) {
+        var b = el('button', null, o[1]); b.type = 'button';
+        b.setAttribute('aria-pressed', state.quiz[q[0]] === o[0]);
+        b.addEventListener('click', function () {
+          state.quiz[q[0]] = state.quiz[q[0]] === o[0] ? undefined : o[0];
+          save(); renderQuiz();
+        });
+        yn.appendChild(b);
+      });
+      box.appendChild(yn); host.appendChild(box);
+    });
+    var r = document.getElementById('dwResult');
+    var answered = QUIZ.filter(function (q) { return state.quiz[q[0]]; }).length;
+    var yes = QUIZ.filter(function (q) { return state.quiz[q[0]] === 'y'; }).length;
+    r.className = 'result'; r.innerHTML = '';
+    if (answered < QUIZ.length) { r.textContent = T[lang].dwEmpty; return; }
+    var res = yes >= 4 ? ['bad', T[lang].dwHigh] : yes >= 2 ? ['warn', T[lang].dwMid] : ['ok', T[lang].dwLow];
+    r.classList.add(res[0]);
+    r.appendChild(el('strong', null, res[1][0] + ' (' + yes + '/5)'));
+    r.appendChild(el('span', null, res[1][1]));
+  }
+
+  function render() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i]').forEach(function (n) { n.textContent = T[lang][n.getAttribute('data-i')]; });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang); });
+    var name = document.getElementById('subbie'); name.placeholder = T[lang].namePh; name.value = state.name || '';
+    var s = document.getElementById('sections'); s.innerHTML = '';
+    SECTIONS.forEach(function (sec) { renderList(sec, s, sec[lang]); });
+    var inc = document.getElementById('incident'); inc.innerHTML = ''; inc.style.marginTop = '12px';
+    renderList(INCIDENT, inc, null);
+    renderQuiz();
+  }
+
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { lang = b.getAttribute('data-lang'); state.lang = lang; save(); render(); });
+  });
+  document.getElementById('subbie').addEventListener('input', function (e) { state.name = e.target.value; save(); });
+  document.getElementById('print').addEventListener('click', function () {
+    var t = document.title; if (state.name) document.title = 'Subbie Checklist — ' + state.name;
+    window.print(); document.title = t;
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    if (!confirm(T[lang].resetConfirm)) return;
+    state = { lang: lang, name: '', checks: {}, quiz: {} }; save(); render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
