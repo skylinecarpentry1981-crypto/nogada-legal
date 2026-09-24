@@ -9,6 +9,8 @@ Required by Apple App Store + Google Play Store as publicly-accessible URLs.
 - `index.html` — landing page with links + support email
 - `privacy.html` — full Privacy Policy
 - `terms.html` — full Terms of Service
+- `support.html` — FAQ / support page
+- `subcontractor.html` — Subbie onboarding checklist, deemed-worker self check, incident steps (VIC). Korean / English / Chinese; ticks saved per device; Download PDF (A4, per subbie) or Print. `?lang=ko|en|zh` forces the language.
 
 All static, no build step, dark/light mode auto.
 
@@ -37,6 +39,8 @@ and replace the placeholder constants:
 ```js
 const PRIVACY_URL = 'https://YOUR-USERNAME.github.io/nogada-legal/privacy.html';
 const TERMS_URL   = 'https://YOUR-USERNAME.github.io/nogada-legal/terms.html';
+const SUBBIE_URL  = 'https://YOUR-USERNAME.github.io/nogada-legal/subcontractor.html?lang=' + i18n.language;
+// More → Safety → Subbie Checklist:  Linking.openURL(SUBBIE_URL)  (or WebBrowser.openBrowserAsync)
 ```
 
 Then OTA push (`eas update --branch production --message "wire legal urls"`).
